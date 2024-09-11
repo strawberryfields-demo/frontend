@@ -37,7 +37,7 @@ export const folderStructureConfig = createFolderStructure({
   },
   rules: {
     ts_rule: {
-      children: [{ name: "{camelCase}.ts" }],
+      children: [{ name: "{camelCase}.ts" }, { name: ".gitkeep" }],
     },
     api_rule: {
       children: [
@@ -48,16 +48,21 @@ export const folderStructureConfig = createFolderStructure({
       ],
     },
     component_folder: {
-      children: [{ name: "{PascalCase}", children: [{ name: "{PascalCase}.tsx" }, { name: "{PascalCase}.scss" }] }],
+      children: [
+        {
+          name: "{PascalCase}",
+          children: [{ name: "{PascalCase}.tsx" }, { name: "{PascalCase}.scss" }, { name: ".gitkeep" }],
+        },
+      ],
     },
     hook_rule: {
-      children: [{ name: "use{PascalCase}.ts" }],
+      children: [{ name: "use{PascalCase}.ts" }, { name: ".gitkeep" }],
     },
     store_rule: {
-      children: [{ name: "use{PascalCase}Store.ts" }],
+      children: [{ name: "use{PascalCase}Store.ts" }, { name: ".gitkeep" }],
     },
     json_rule: {
-      children: [{ name: "{camelCase}.json" }],
+      children: [{ name: "{camelCase}.json" }, { name: ".gitkeep" }],
     },
   },
 });
