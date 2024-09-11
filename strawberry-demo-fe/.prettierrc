@@ -1,4 +1,5 @@
 {
+  "endOfLine": "auto",
   "bracketSameLine": false,
   "bracketSpacing": true,
   "semi": true,
