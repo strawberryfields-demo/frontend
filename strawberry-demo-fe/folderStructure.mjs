@@ -17,7 +17,7 @@ export const folderStructureConfig = createFolderStructure({
 
           { name: "apis", ruleId: "api_rule" },
           { name: "stores", ruleId: "store_rule" },
-          { name: "routes", ruleId: "ts_rule" },
+          { name: "routes", ruleId: "router_rule" },
           { name: "hooks", ruleId: "hook_rule" },
           { name: "utils", ruleId: "ts_rule" },
           { name: "types", ruleId: "ts_rule" },
@@ -63,6 +63,13 @@ export const folderStructureConfig = createFolderStructure({
     },
     json_rule: {
       children: [{ name: "{camelCase}.json" }, { name: ".gitkeep" }],
+    },
+    router_rule: {
+      children: [
+        { name: "Router.tsx" },
+        { name: "{PascalCase}", children: [{ name: "{PascalCase}.tsx" }] },
+        { name: ".gitkeep" },
+      ],
     },
   },
 });
