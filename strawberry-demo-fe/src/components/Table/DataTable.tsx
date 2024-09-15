@@ -4,12 +4,14 @@ import { DataTableProps as DefaultDataTableProps } from "@/types/table";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { ModalTitle } from "../Modal/ModalElement";
+import { TableTitle } from "./TableElement";
 
 type DataTableProps<TData, TValue> = DefaultDataTableProps<TData, TValue> & {
+  title?: string;
   onSelectedRowDelete?: (selectedRows: TData[]) => void;
 };
 
-export function DataTable<TData, TValue>({ columns, data, onSelectedRowDelete }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDelete }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
@@ -38,7 +40,7 @@ export function DataTable<TData, TValue>({ columns, data, onSelectedRowDelete }:
   return (
     <>
       <div className="flex justify-between items-center">
-        <ModalTitle>업로드할 음악 리스트</ModalTitle>
+        <TableTitle title={title} />
         <div className="flex gap-1 items-center">
           {/* TODO: 삭제 onClick */}
           {onSelectedRowDelete && <Button onClick={onDelete}>삭제</Button>}

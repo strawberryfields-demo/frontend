@@ -71,7 +71,12 @@ export default function UploadMusicModal({ musicList, onMusicChange, onMusicDele
         <FileDropzone onChange={handleMusicChange} multiple accept="audio/*" />
       </Form>
       {musicList && musicList.length > 0 && (
-        <DataTable columns={musicTableColumns} data={musicList} onSelectedRowDelete={handleMusicDelete} />
+        <DataTable
+          title="업로드 리스트"
+          columns={musicTableColumns}
+          data={musicList}
+          onSelectedRowDelete={handleMusicDelete}
+        />
       )}
       <Button type="submit" onClick={onUpload}>
         업로드
