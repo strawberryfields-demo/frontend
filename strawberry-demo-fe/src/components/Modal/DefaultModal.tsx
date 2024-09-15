@@ -16,6 +16,7 @@ export default function DefaultModal({ isOpen, onOpenChange, isCloseClickOutside
         <Portal>
           <DialogOverlay />
           <DialogContent
+            className="overflow-auto max-h-[calc(100%-10rem)]"
             onInteractOutside={(e) => {
               if (!isCloseClickOutside) e.preventDefault();
             }}
