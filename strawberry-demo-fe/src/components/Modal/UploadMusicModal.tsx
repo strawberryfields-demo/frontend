@@ -78,9 +78,7 @@ export default function UploadMusicModal({ musicList, onMusicChange, onMusicDele
           onSelectedRowDelete={handleMusicDelete}
         />
       )}
-      <Button type="submit" onClick={onUpload}>
-        업로드
-      </Button>
+      <Button onClick={onUpload}>업로드</Button>
     </Modal>
   );
 }
