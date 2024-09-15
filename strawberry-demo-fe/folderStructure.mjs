@@ -53,6 +53,11 @@ export const folderStructureConfig = createFolderStructure({
           name: "{PascalCase}",
           children: [{ name: "{PascalCase}.tsx" }, { name: "{PascalCase}.scss" }, { name: ".gitkeep" }],
         },
+        {
+          //shadcn 용 folder
+          name: "ui",
+          children: [{ name: "*" }],
+        },
       ],
     },
     hook_rule: {
