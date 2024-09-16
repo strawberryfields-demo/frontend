@@ -8,12 +8,14 @@ import Pagination, { PaginationProps } from "../Pagination/Pagination";
 
 type DataTableProps<TData, TValue> = DefaultDataTableProps<TData, TValue> & {
   title?: string;
+  placeholder?: string;
   onSelectedRowDelete?: (selectedRows: TData[]) => void;
   pagination?: PaginationProps;
 };
 
 export function DataTable<TData, TValue>({
   title,
+  placeholder,
   columns,
   data,
   onSelectedRowDelete,
@@ -80,7 +82,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {placeholder}
                 </TableCell>
               </TableRow>
             )}

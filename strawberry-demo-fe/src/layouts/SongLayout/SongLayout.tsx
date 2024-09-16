@@ -91,6 +91,7 @@ export default function SongLayout() {
           data={musicList}
           onSelectedRowDelete={handleMusicDelete}
           pagination={pagination}
+          placeholder="등록된 음악이 없습니다."
         />
       </Section>
       <UploadMusicModal />
