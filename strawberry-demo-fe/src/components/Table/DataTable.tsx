@@ -39,7 +39,7 @@ export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDe
 
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="py-4 flex justify-between items-center">
         <TableTitle title={title} />
         <div className="flex gap-1 items-center">
           {/* TODO: 삭제 onClick */}
