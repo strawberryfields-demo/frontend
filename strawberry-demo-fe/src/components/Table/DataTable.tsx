@@ -3,15 +3,22 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { DataTableProps as DefaultDataTableProps } from "@/types/table";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { ModalTitle } from "../Modal/ModalElement";
 import { TableTitle } from "./TableElement";
+import Pagination, { PaginationProps } from "../Pagination/Pagination";
 
 type DataTableProps<TData, TValue> = DefaultDataTableProps<TData, TValue> & {
   title?: string;
   onSelectedRowDelete?: (selectedRows: TData[]) => void;
+  pagination?: PaginationProps;
 };
 
-export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDelete }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+  title,
+  columns,
+  data,
+  onSelectedRowDelete,
+  pagination,
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
@@ -80,6 +87,7 @@ export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDe
           </TableBody>
         </Table>
       </div>
+      {pagination && <Pagination className="py-4" {...pagination} />}
     </>
   );
 }
