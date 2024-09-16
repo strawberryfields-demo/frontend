@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Song of the Sea",
+      "artist": "Ocean Waves",
+      "album": "Sounds of Nature",
+      "duration": 210,
+      "genre": "Ambient",
+      "releaseDate": "2022-05-21",
+      "musicUrl": "https://www.sample-videos.com/audio/mp3/wave.mp3"
+    },
+    {
+      "id": "2",
+      "name": "Relaxing Piano",
+      "artist": "Piano Dreams",
+      "album": "Peaceful Mind",
+      "duration": 180,
+      "genre": "Classical",
+      "releaseDate": "2021-11-14",
+      "musicUrl": "https://www.sample-videos.com/audio/mp3/piano.mp3"
+    },
+    {
+      "id": "3",
+      "name": "Acoustic Vibes",
+      "artist": "Guitar Soul",
+      "album": "Unplugged",
+      "duration": 240,
+      "genre": "Acoustic",
+      "releaseDate": "2020-07-10",
+      "musicUrl": "https://www.sample-videos.com/audio/mp3/acoustic.mp3"
+    }
+  ],
+  "totalItems": 3,
+  "itemsPerPage": 3,
+  "currentPage": 1,
+  "totalPages": 1,
+  "hasNextPage": false,
+  "hasPreviousPage": false
+}

@@ -3,15 +3,24 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { DataTableProps as DefaultDataTableProps } from "@/types/table";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { ModalTitle } from "../Modal/ModalElement";
 import { TableTitle } from "./TableElement";
+import Pagination, { PaginationProps } from "../Pagination/Pagination";
 
 type DataTableProps<TData, TValue> = DefaultDataTableProps<TData, TValue> & {
   title?: string;
+  placeholder?: string;
   onSelectedRowDelete?: (selectedRows: TData[]) => void;
+  pagination?: PaginationProps;
 };
 
-export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDelete }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+  title,
+  placeholder,
+  columns,
+  data,
+  onSelectedRowDelete,
+  pagination,
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
@@ -39,7 +48,7 @@ export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDe
 
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="py-4 flex justify-between items-center">
         <TableTitle title={title} />
         <div className="flex gap-1 items-center">
           {/* TODO: 삭제 onClick */}
@@ -73,13 +82,14 @@ export function DataTable<TData, TValue>({ title, columns, data, onSelectedRowDe
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {placeholder}
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
+      {pagination && <Pagination className="py-4" {...pagination} />}
     </>
   );
 }

@@ -1,13 +1,12 @@
-import { DialogDescription } from "@radix-ui/react-dialog";
-import { Button } from "../ui/button";
-import { DialogHeader } from "../ui/dialog";
-import Modal from "./Modal";
-import Form from "../FormElement/Form";
-import { ModalTitle } from "./ModalElement";
-import { DataTable } from "../Table/DataTable";
-import FileDropzone from "../FormElement/FileDropzone";
+import FileDropzone from "@/components/FormElement/FileDropzone";
+import Modal from "@/components/Modal/Modal";
+import { ModalTitle } from "@/components/Modal/ModalElement";
+import { DataTable } from "@/components/Table/DataTable";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { DialogDescription, DialogHeader } from "@/components/ui/dialog";
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "../ui/checkbox";
+import { Form } from "react-router-dom";
 
 type UploadMusicModalProps = {
   musicList: File[];
