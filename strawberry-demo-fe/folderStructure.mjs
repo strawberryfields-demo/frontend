@@ -44,6 +44,7 @@ export const folderStructureConfig = createFolderStructure({
         { name: "api", ruleId: "ts_rule" },
         { name: "services", ruleId: "ts_rule" },
         { name: "dtos", ruleId: "ts_rule" },
+        { name: "errors", ruleId: "ts_rule" },
         { name: "axios.ts" },
       ],
     },
