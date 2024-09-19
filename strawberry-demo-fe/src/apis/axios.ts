@@ -7,3 +7,22 @@ export const axiosInstance: AxiosInstance = axios.create({
     Authorization: "Bearer " + localStorage.getItem("accessToken"),
   },
 });
+type OPTIONS<D> = Omit<AxiosRequestConfig<D>, "method" | "url" | "data" | "headers" | "params">;
+const apiCall = <RequestDTO, ResponseDTO>(
+  method: HTTP_METHOD,
+  endpoint: ENDPOINT,
+  data?: RequestDTO,
+  headers?: AxiosHeaders,
+  params?: any,
+  option?: OPTIONS<RequestDTO>,
+) =>
+  axiosInstance.request<ResponseDTO, AxiosResponse<ResponseDTO>, RequestDTO>({
+    method,
+    url: endpoint,
+    data,
+    headers,
+    params,
+    ...option,
+  });
+
+export default apiCall;
