@@ -3,9 +3,11 @@ import axios, { AxiosHeaders, AxiosInstance, AxiosRequestConfig, AxiosResponse }
 import { URLSearchParams } from "url";
 import { tokenRequestInterceptor, tokenResponseInterceptor } from "./services/tokenInterceptor";
 import { overMaxContentLengthRequestInterceptor } from "./services/overMaxContentLengthInterceptor";
+import { addSlashAtEndRequestInterceptor } from "./services/addSlashAtEndInterceptor";
 
 export const axiosInstance: AxiosInstance = axios.create();
 
+axiosInstance.interceptors.request.use(addSlashAtEndRequestInterceptor);
 axiosInstance.interceptors.request.use(tokenRequestInterceptor);
 axiosInstance.interceptors.request.use(overMaxContentLengthRequestInterceptor);
 axiosInstance.interceptors.response.use(tokenResponseInterceptor.response, tokenResponseInterceptor.error);
