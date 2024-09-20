@@ -1,0 +1,10 @@
+@tailwind utilities;
+
+@layer utilities {
+  .divider-style > * {
+    @apply px-2;
+  }
+  .divider-style > *:not(:last-child) {
+    @apply border-r border-slate-300;
+  }
+}
