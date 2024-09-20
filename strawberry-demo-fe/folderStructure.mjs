@@ -37,7 +37,7 @@ export const folderStructureConfig = createFolderStructure({
   },
   rules: {
     ts_rule: {
-      children: [{ name: "{camelCase}.ts" }, { name: ".gitkeep" }],
+      children: [{ name: "{camelCase}.ts" }, { name: ".gitkeep" }, { name: "{camelCase}", ruleId: "ts_rule" }],
     },
     api_rule: {
       children: [
