@@ -1,8 +1,7 @@
-import { PAGE_PATHS } from "./paths";
+import { PAGE_PATH_KEYS } from "./paths";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-type PAGE_PATH_KEYS = keyof typeof PAGE_PATHS;
 type API_URL_TYPE = {
   [Key in PAGE_PATH_KEYS]: {
     [SubKey: string]: string;

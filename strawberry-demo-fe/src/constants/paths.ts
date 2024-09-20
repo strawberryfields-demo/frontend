@@ -6,3 +6,5 @@ export const PAGE_PATHS = {
   SONG: "/song",
   PITCH_LOG: "/pitch-log",
 } as const;
+
+export type PAGE_PATH_KEYS = keyof typeof PAGE_PATHS;
