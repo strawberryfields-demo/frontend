@@ -1,5 +1,5 @@
 import { signinAPI } from "@/apis/api/signinAPI";
-import { SignInRequestDTO } from "@/apis/dtos/signinDto";
+import { SignInRequestDTO, SignInResponseErrorDTO } from "@/apis/dtos/signinDto";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useCallback } from "react";
@@ -11,8 +11,6 @@ export const useSignin = <OriginDataType>(
 ) => {
   const navigate = useNavigate();
 
-  //유효한 토큰이 있을 경우 다른 페이지로 리다이렉트
-
   const signin = useMutation({
     mutationFn: (data: SignInRequestDTO) => signinAPI(data),
     onSuccess: ({ data }) => {
@@ -21,7 +19,7 @@ export const useSignin = <OriginDataType>(
     },
     //TODO:  에러 처리
     //TODO: AxiosError를 직접 써야하는 것이 불만, 개선 방법있는지 탐색
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosError<SignInResponseErrorDTO>) => {
       console.log(error.response?.data);
     },
   });

@@ -6,3 +6,8 @@ export interface SignInRequestDTO {
 export interface SignInResponseDTO {
   access_token: string;
 }
+
+export interface SignInResponseErrorDTO {
+  email?: string[];
+  password?: string[];
+}
