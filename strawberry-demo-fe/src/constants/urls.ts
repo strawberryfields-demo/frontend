@@ -1,11 +1,10 @@
-import { PAGE_PATHS } from "./paths";
+import { PAGE_PATH_KEYS } from "./paths";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-type PAGE_PATH_KEYS = keyof typeof PAGE_PATHS;
 type API_URL_TYPE = {
   [Key in PAGE_PATH_KEYS]: {
-    [SubKey: string]: string;
+    [SubKey: string]: ((...args: any[]) => string) | string;
   };
 };
 
@@ -20,6 +19,8 @@ export const API_URLS: API_URL_TYPE = {
     SIGN_UP: `${API_BASE_URL}/user/sign-in`,
   },
   DASHBOARD: {},
-  SONG: {},
+  SONG: {
+    GET_SONG: (songId) => `${API_BASE_URL}/song/${songId}`,
+  },
   PITCH_LOG: {},
 } as const;

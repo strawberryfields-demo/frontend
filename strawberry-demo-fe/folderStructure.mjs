@@ -62,7 +62,11 @@ export const folderStructureConfig = createFolderStructure({
       ],
     },
     hook_rule: {
-      children: [{ name: "use{PascalCase}.ts" }, { name: ".gitkeep" }],
+      children: [
+        { name: "use{PascalCase}.ts" },
+        { name: ".gitkeep" },
+        { name: "use{PascalCase}", ruleId: "hook_rule" },
+      ],
     },
     store_rule: {
       children: [{ name: "use{PascalCase}Store.ts" }, { name: ".gitkeep" }],
