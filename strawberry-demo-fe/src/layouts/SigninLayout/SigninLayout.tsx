@@ -19,12 +19,15 @@ type SigninLayoutProps = {
 };
 
 export default function SigninLayout({ onSignin, isOnLogin }: SigninLayoutProps) {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormData>();
+    setError,
+  } = useForm<SignInFormData>({
+    reValidateMode: "onSubmit",
+    shouldFocusError: true,
+  });
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => onSignin(data);
 
@@ -36,6 +39,11 @@ export default function SigninLayout({ onSignin, isOnLogin }: SigninLayoutProps)
           <Input
             placeholder="이메일"
             {...register("email", {
+              required: "이메일을 입력해주세요.",
+              pattern: {
+                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                message: "이메일 형식이 올바르지 않습니다.",
+              },
             })}
           />
         </FormElement>
@@ -43,6 +51,19 @@ export default function SigninLayout({ onSignin, isOnLogin }: SigninLayoutProps)
           <Input
             placeholder="비밀번호"
             {...register("password", {
+              required: "비밀번호를 입력해주세요.",
+              // minLength: {
+              //   value: 8,
+              //   message: "비밀번호는 8자 이상이어야 합니다.",
+              // },
+              // maxLength: {
+              //   value: 20,
+              //   message: "비밀번호는 20자 이하여야 합니다.",
+              // },
+              // pattern: {
+              //   value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/g,
+              //   message: "비밀번호는 영문 대소문자, 숫자를 포함해야 합니다.",
+              // },
             })}
           />
         </FormElement>
