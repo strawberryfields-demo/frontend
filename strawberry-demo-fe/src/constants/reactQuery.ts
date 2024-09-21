@@ -21,6 +21,7 @@ export const QUERY_KEYS: QUERY_KEY_TYPE = {
   SONG: {
     GET_SONG: (songId: string) =>
       getReactQueryKeysFromURL((API_URLS["SONG"]["GET_SONG"] as (id: string) => string)(songId)),
+    GET_SONG_LIST: getReactQueryKeysFromURL(API_URLS["SONG"]["GET_SONG_LIST"] as string),
   },
   PITCH_LOG: {},
 };
