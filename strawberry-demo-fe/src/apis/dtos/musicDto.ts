@@ -1,7 +1,7 @@
 import { AllowedMusicExtension } from "@/types/music";
 import { PaginationDto } from "./pagination";
 
-export interface MusicResponseAPI {
+export interface MusicResponseDTO {
   id: string;
   name: string;
   artist: string;
@@ -12,15 +12,21 @@ export interface MusicResponseAPI {
   musicUrl: string;
 }
 
-export interface MusicListResponseAPI extends PaginationDto<MusicResponseAPI> {}
+export interface MusicListResponseDTO extends PaginationDto<MusicResponseDTO> {}
 
-export interface MusicUploadRequestAPI {
+export interface MusicUploadRequestDTO {
   music_metadatas: MusicMetaData[];
 }
 
-export interface MusicUploadResponseAPI {
+export interface MusicUploadResponseDTO {
   s3_urls: string[];
 }
+
+export interface MusicUploadResponseErrorDTO {}
+
+export interface MusicUploadToS3RequestDTO extends File {}
+export interface MusicUploadToS3ResponseDTO {}
+export interface MusicUploadToS3ResponseErrorDTO {}
 
 export interface MusicMetaData {
   name: string;
