@@ -10,7 +10,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import musiclistMock from "@/mocks/musiclist.json";
 import Section from "@/components/PageLayout/Section";
 import { useState } from "react";
-import Pagination from "@/components/Pagination/Pagination";
 import { usePagination } from "@/hooks/usePagination";
 import { PageTitle } from "@/components/PageLayout/PageElement";
 
