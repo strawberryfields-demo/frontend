@@ -24,6 +24,6 @@ export interface MusicUploadResponseAPI {
 
 export interface MusicMetaData {
   name: string;
-  duration: number;
+  size: number;
   extension: AllowedMusicExtension;
 }
