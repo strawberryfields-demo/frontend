@@ -8,10 +8,12 @@ import { useState } from "react";
 
 export const useSongUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadSuccessStatuses, setUploadSuccessStatuses] = useState<boolean[]>([]);
 
   const handleMusicUpload = async (files: File[]) => {
     try {
       setIsUploading(true);
+      setUploadSuccessStatuses(files.map(() => false));
 
       // 메타데이터 추출
       const musicMetaDatas = files.map<MusicMetaData>((file) => {
@@ -34,6 +36,11 @@ export const useSongUpload = () => {
         files,
         s3PresignedPostResponses,
       });
+
+      const successStatusArray = songUploadToS3ParallelResults.map(
+        (response) => response.status >= 200 && response.status < 300,
+      );
+      setUploadSuccessStatuses(successStatusArray);
     } finally {
       setIsUploading(false);
     }
@@ -63,6 +70,7 @@ export const useSongUpload = () => {
   return {
     handleMusicUpload,
     isUploading,
+    uploadSuccessStatuses,
     songUpload,
     songUploadToS3Parallel,
   };
