@@ -1,5 +1,6 @@
 import { AllowedMusicExtension } from "@/types/music";
 import { PaginationDto } from "./pagination";
+import { S3PresignedPostResponse } from "./s3Dto";
 
 export interface MusicResponseDTO {
   id: string;
@@ -19,12 +20,14 @@ export interface MusicUploadRequestDTO {
 }
 
 export interface MusicUploadResponseDTO {
-  s3_urls: string[];
+  s3_urls: S3PresignedPostResponse[];
 }
 
 export interface MusicUploadResponseErrorDTO {}
 
-export interface MusicUploadToS3RequestDTO extends File {}
+export interface MusicUploadToS3RequestDTO extends S3PresignedPostResponse {
+  file: File;
+}
 export interface MusicUploadToS3ResponseDTO {}
 export interface MusicUploadToS3ResponseErrorDTO {}
 
