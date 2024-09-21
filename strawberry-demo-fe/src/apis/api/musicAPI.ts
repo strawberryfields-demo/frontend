@@ -2,6 +2,7 @@ import { API_URLS } from "@/constants/urls";
 import { MusicUploadRequestDTO, MusicUploadResponseDTO } from "../dtos/musicDto";
 import apiCall from "../axios";
 import { AxiosHeaders } from "axios";
+import { S3PresignedPostResponse } from "../dtos/s3Dto";
 
 const { UPLOAD_SONG } = API_URLS.SONG;
 
@@ -12,19 +13,22 @@ export const uploadSongMetaDataAndGetS3URL = async (data: MusicUploadRequestDTO)
     data,
   });
 
-export const uploadSongToS3API = async (data: File, s3Endpoint: string) =>
+export const uploadSongToS3API = async (file: File, s3PresignedPostResponse: S3PresignedPostResponse) =>
   await apiCall({
-    method: "PUT",
-    endpoint: s3Endpoint,
-    data,
+    method: "POST",
+    endpoint: s3PresignedPostResponse.url,
+    data: {
+      ...s3PresignedPostResponse.fields,
+      file,
+    },
     headers: new AxiosHeaders({
-      "Content-Type": data.type,
+      "Content-Type": "multipart/form-data",
     }),
   });
 
-export const uploadSongToS3ParallelAPI = async (data: File[], s3Endpoints: string[]) =>
+export const uploadSongToS3ParallelAPI = async (data: File[], s3PresignedPostResponses: S3PresignedPostResponse[]) =>
   await Promise.all(
-    s3Endpoints.map((url, index) => {
-      return uploadSongToS3API(data[index], url);
-    }),
+    s3PresignedPostResponses.map((s3PresignedPostResponse, index) =>
+      uploadSongToS3API(data[index], s3PresignedPostResponse),
+    ),
   );

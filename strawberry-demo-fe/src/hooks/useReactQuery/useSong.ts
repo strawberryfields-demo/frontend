@@ -1,5 +1,6 @@
 import { uploadSongMetaDataAndGetS3URL, uploadSongToS3ParallelAPI } from "@/apis/api/musicAPI";
 import { MusicMetaData, MusicUploadRequestDTO, MusicUploadResponseErrorDTO } from "@/apis/dtos/musicDto";
+import { S3PresignedPostResponse } from "@/apis/dtos/s3Dto";
 import { AllowedMusicExtension } from "@/types/music";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -25,11 +26,14 @@ export const useSongUpload = () => {
       // 메타데이터 업로드 후 S3 URL 받아오기
       const {
         data: {
-          s3_urls: [...s3Urls],
+          s3_urls: [...s3PresignedPostResponses],
         },
       } = await songUpload.mutateAsync({ music_metadatas: musicMetaDatas });
 
-      const songUploadToS3ParallelResults = await songUploadToS3Parallel.mutateAsync({ files, s3Urls });
+      const songUploadToS3ParallelResults = await songUploadToS3Parallel.mutateAsync({
+        files,
+        s3PresignedPostResponses,
+      });
     } finally {
       setIsUploading(false);
     }
@@ -43,7 +47,13 @@ export const useSongUpload = () => {
   });
 
   const songUploadToS3Parallel = useMutation({
-    mutationFn: ({ files, s3Urls }: { files: File[]; s3Urls: string[] }) => uploadSongToS3ParallelAPI(files, s3Urls),
+    mutationFn: ({
+      files,
+      s3PresignedPostResponses,
+    }: {
+      files: File[];
+      s3PresignedPostResponses: S3PresignedPostResponse[];
+    }) => uploadSongToS3ParallelAPI(files, s3PresignedPostResponses),
     onError: (error: AxiosError) => {
       console.log(error);
       console.log("S3 업로드 일부 실패");
