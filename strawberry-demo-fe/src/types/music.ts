@@ -8,3 +8,5 @@ export type Music = {
   releaseDate: string;
   musicUrl: string;
 };
+
+export type AllowedMusicExtension = "mp3" | "wav";

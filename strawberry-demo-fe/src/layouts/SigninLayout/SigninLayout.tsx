@@ -5,18 +5,17 @@ import Section from "@/components/PageLayout/Section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { SignInFormData } from "@/types/forms";
+import { FormReturn, SignInFormData } from "@/types/forms";
 import ElementWithDivider from "@/components/Divider/ElementWithDivider";
 import { Link } from "react-router-dom";
 import { PAGE_PATHS } from "@/constants/paths";
 import { PageTitle } from "@/components/PageLayout/PageElement";
 import FormElement from "@/components/FormElement/FormElement";
-import { UseSigninFormReturn } from "@/hooks/useForm/useSigninForm";
 
 type SigninLayoutProps = {
   onSubmit: (formData: SignInFormData) => void;
   isOnLogin: boolean;
-  signinFormResults: UseSigninFormReturn;
+  signinFormResults: FormReturn<SignInFormData>;
 };
 
 export default function SigninLayout({

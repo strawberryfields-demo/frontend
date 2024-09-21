@@ -2,8 +2,10 @@ import { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { ForbiddenError, UnauthorizedError } from "../errors";
 
 export const tokenRequestInterceptor = (config: InternalAxiosRequestConfig) => {
+  if (config.url && new URL(config.url).origin !== import.meta.env.VITE_API_BASE_URL) return config;
+
   //TODO: Zustand로 변경
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem("access_token");
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }

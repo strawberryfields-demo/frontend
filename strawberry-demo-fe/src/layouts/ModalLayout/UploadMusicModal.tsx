@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogDescription, DialogHeader } from "@/components/ui/dialog";
 import { ColumnDef } from "@tanstack/react-table";
+import { Loader2 } from "lucide-react";
 import { Form } from "react-router-dom";
 
 type UploadMusicModalProps = {
@@ -13,9 +14,10 @@ type UploadMusicModalProps = {
   onMusicChange: (music: FileList | File[]) => void;
   onMusicDelete: (selectedRows: File[]) => void;
   onUpload: () => void;
+  isUploading?: boolean;
 };
 
-const musicTableColumns: ColumnDef<File>[] = [
+const uploadMusicTableColumns: ColumnDef<File>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -49,7 +51,13 @@ const musicTableColumns: ColumnDef<File>[] = [
   },
 ];
 
-export default function UploadMusicModal({ musicList, onMusicChange, onMusicDelete, onUpload }: UploadMusicModalProps) {
+export default function UploadMusicModal({
+  musicList,
+  onMusicChange,
+  onMusicDelete,
+  onUpload,
+  isUploading,
+}: UploadMusicModalProps) {
   const handleMusicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       onMusicChange(e.target.files);
@@ -72,12 +80,15 @@ export default function UploadMusicModal({ musicList, onMusicChange, onMusicDele
       {musicList && musicList.length > 0 && (
         <DataTable
           title="업로드 리스트"
-          columns={musicTableColumns}
+          columns={uploadMusicTableColumns}
           data={musicList}
           onSelectedRowDelete={handleMusicDelete}
         />
       )}
-      <Button onClick={onUpload}>업로드</Button>
+      <Button onClick={onUpload} disabled={isUploading}>
+        {isUploading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        업로드
+      </Button>
     </Modal>
   );
 }
