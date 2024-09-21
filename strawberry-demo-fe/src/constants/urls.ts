@@ -21,6 +21,7 @@ export const API_URLS: API_URL_TYPE = {
   DASHBOARD: {},
   SONG: {
     GET_SONG: (songId) => `${API_BASE_URL}/song/${songId}`,
+    UPLOAD_SONG: `${API_BASE_URL}/music/upload`,
   },
   PITCH_LOG: {},
 } as const;
