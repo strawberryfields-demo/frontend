@@ -1,11 +1,8 @@
 export interface PaginationDto<T> {
-  items: T[];
-  totalItems: number;
-  itemsPerPage: number;
-  currentPage: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
+  results: T[];
+  count: number;
+  next?: string;
+  previous?: string;
 }
 
 export interface PaginationQueryDto {
