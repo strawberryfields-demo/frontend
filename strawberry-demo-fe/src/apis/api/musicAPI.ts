@@ -1,10 +1,17 @@
+import { PaginationDto, PaginationQueryDto } from "./../dtos/paginationDto";
 import { API_URLS } from "@/constants/urls";
-import { MusicUploadRequestDTO, MusicUploadResponseDTO } from "../dtos/musicDto";
+import {
+  MusicListRequestDTO,
+  MusicListResponseDTO,
+  MusicUploadRequestDTO,
+  MusicUploadResponseDTO,
+} from "../dtos/musicDto";
 import apiCall from "../axios";
 import { AxiosHeaders } from "axios";
 import { S3PresignedPostResponse } from "../dtos/s3Dto";
+import { getPaginationQuery } from "../services/paginations";
 
-const { UPLOAD_SONG } = API_URLS.SONG;
+const { UPLOAD_SONG, GET_SONG_LIST } = API_URLS.SONG;
 
 export const uploadSongMetaDataAndGetS3URL = async (data: MusicUploadRequestDTO) =>
   await apiCall<MusicUploadRequestDTO, MusicUploadResponseDTO>({
@@ -32,3 +39,10 @@ export const uploadSongToS3ParallelAPI = async (data: File[], s3PresignedPostRes
       uploadSongToS3API(data[index], s3PresignedPostResponse),
     ),
   );
+
+export const getSongListAPI = async (paginationQueryDto: PaginationQueryDto) =>
+  await apiCall<MusicListRequestDTO, MusicListResponseDTO>({
+    method: "GET",
+    endpoint: GET_SONG_LIST as string,
+    params: getPaginationQuery(paginationQueryDto),
+  });

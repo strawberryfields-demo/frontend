@@ -1,18 +1,14 @@
 import { AllowedMusicExtension } from "@/types/music";
-import { PaginationDto } from "./pagination";
+import { PaginationDto } from "./paginationDto";
 import { S3PresignedPostResponse } from "./s3Dto";
 
 export interface MusicResponseDTO {
   id: string;
-  name: string;
-  artist: string;
-  album?: string;
-  duration: number;
-  genre?: string;
-  releaseDate: string;
-  musicUrl: string;
+  title: string;
+  file_path: string;
 }
 
+export interface MusicListRequestDTO {}
 export interface MusicListResponseDTO extends PaginationDto<MusicResponseDTO> {}
 
 export interface MusicUploadRequestDTO {

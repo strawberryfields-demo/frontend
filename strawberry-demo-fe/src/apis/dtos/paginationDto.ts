@@ -6,6 +6,6 @@ export interface PaginationDto<T> {
 }
 
 export interface PaginationQueryDto {
-  page?: number;
-  limit?: number;
+  page?: string;
+  limit?: string;
 }
