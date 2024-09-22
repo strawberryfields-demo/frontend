@@ -15,7 +15,7 @@ export const QUERY_KEYS: QUERY_KEY_TYPE = {
     SIGN_IN: getReactQueryKeysFromURL(API_URLS["SIGN_IN"]["SIGN_IN"] as string),
   },
   SIGN_UP: {
-    SIGN_UP: getReactQueryKeysFromURL(API_URLS["SIGN_IN"]["SIGN_UP"] as string),
+    SIGN_UP: getReactQueryKeysFromURL(API_URLS["SIGN_UP"]["SIGN_UP"] as string),
   },
   DASHBOARD: {},
   SONG: {
