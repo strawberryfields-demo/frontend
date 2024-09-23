@@ -3,18 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import UploadMusicModal from "@/pages/SongPage/UploadMusicModalContainer";
 import { useModalStore } from "@/stores/useModalStore";
-import { Music } from "@/types/music";
-import { secondToTime } from "@/utils/time";
 import { ColumnDef } from "@tanstack/react-table";
 
-import musiclistMock from "@/mocks/musiclist.json";
 import Section from "@/components/PageLayout/Section";
-import { useState } from "react";
-import Pagination from "@/components/Pagination/Pagination";
 import { usePagination } from "@/hooks/usePagination";
 import { PageTitle } from "@/components/PageLayout/PageElement";
+import { Music } from "@/types/music";
 
-const columns: ColumnDef<Music>[] = [
+type songTableData = Pick<Music, "id" | "title" | "file_path">;
+const columns: ColumnDef<songTableData>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -39,24 +36,17 @@ const columns: ColumnDef<Music>[] = [
   },
   {
     header: "음악명",
-    accessorKey: "name",
+    accessorKey: "title",
     meta: {
       headerClassName: "w-1/2",
     },
   },
-  {
-    header: "길이",
-    accessorKey: "duration",
-    cell: ({ row }) => {
-      const duration = row.getValue<number>("duration");
-      return <p>{secondToTime(duration)}</p>;
-    },
-  },
+
   {
     header: "재생",
-    accessorKey: "musicUrl",
+    accessorKey: "file_path",
     cell: ({ row }) => {
-      const musicUrl = row.getValue<string>("musicUrl");
+      const musicUrl = row.getValue<string>("file_path");
       return <audio src={musicUrl} controls />;
     },
     meta: {
@@ -65,14 +55,13 @@ const columns: ColumnDef<Music>[] = [
   },
 ];
 
-export default function SongLayout() {
-  const pagination = usePagination(1, 1, 10, 5);
-  const toggleModal = useModalStore((state) => state.toggle);
-  const [musicList, setMusicList] = useState(musiclistMock.items);
+type SongLayoutProps = {
+  songList: songTableData[];
+  pagination: ReturnType<typeof usePagination>;
+};
 
-  const handleMusicDelete = (selectedRows: Music[]) => {
-    setMusicList((prev) => prev.filter((item) => !selectedRows.includes(item)));
-  };
+export default function SongLayout({ songList, pagination }: SongLayoutProps) {
+  const toggleModal = useModalStore((state) => state.toggle);
 
   return (
     <>
@@ -88,8 +77,8 @@ export default function SongLayout() {
         <DataTable
           title="업로드 목록 관리"
           columns={columns}
-          data={musicList}
-          onSelectedRowDelete={handleMusicDelete}
+          data={songList}
+          onSelectedRowDelete={() => {}}
           pagination={pagination}
           placeholder="등록된 음악이 없습니다."
         />
