@@ -1,10 +1,17 @@
-import { uploadSongMetaDataAndGetS3URL, uploadSongToS3ParallelAPI } from "@/apis/api/musicAPI";
-import { MusicMetaData, MusicUploadRequestDTO, MusicUploadResponseErrorDTO } from "@/apis/dtos/musicDto";
+import { getSongListAPI, uploadSongMetaDataAndGetS3URL, uploadSongToS3ParallelAPI } from "@/apis/api/musicAPI";
+import {
+  MusicMetaData,
+  MusicResponseDTO,
+  MusicUploadRequestDTO,
+  MusicUploadResponseErrorDTO,
+} from "@/apis/dtos/musicDto";
 import { S3PresignedPostResponse } from "@/apis/dtos/s3Dto";
 import { AllowedMusicExtension } from "@/types/music";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useState } from "react";
+import { QUERY_KEYS } from "@/constants/reactQuery";
+import { usePaginatedQuery } from "./usePaginatedQuery";
 
 export const useSongUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
@@ -73,5 +80,24 @@ export const useSongUpload = () => {
     uploadSuccessStatuses,
     songUpload,
     songUploadToS3Parallel,
+  };
+};
+
+export const useSongListGet = () => {
+  const paginatedQueryResult = usePaginatedQuery({
+    queryKey: QUERY_KEYS.SONG.GET_SONG_LIST as string[],
+    apiCall: async (query) => {
+      const response = await getSongListAPI(query);
+      return response;
+    },
+    options: {
+      initPage: 1,
+      limit: 10,
+    },
+  });
+
+  return {
+    ...paginatedQueryResult,
+    data: (paginatedQueryResult.data?.data.results as MusicResponseDTO[]) || [],
   };
 };

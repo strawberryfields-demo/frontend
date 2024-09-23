@@ -20,7 +20,8 @@ export const API_URLS: API_URL_TYPE = {
   },
   DASHBOARD: {},
   SONG: {
-    GET_SONG: (songId) => `${API_BASE_URL}/song/${songId}`,
+    GET_SONG: (songId) => `${API_BASE_URL}/music/${songId}`,
+    GET_SONG_LIST: `${API_BASE_URL}/music/list`,
     UPLOAD_SONG: `${API_BASE_URL}/music/upload`,
   },
   PITCH_LOG: {},
