@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-export const usePagination = (
-  initPage: number,
-  minPage: number = 1,
-  maxPage?: number,
-  visiblePageCount: 1 | 3 | 5 | 7 | 9 = 1,
-) => {
+type UsePaginationOptions = {
+  initPage: number;
+  minPage: number;
+  maxPage?: number;
+  visiblePageCount: 1 | 3 | 5 | 7 | 9;
+};
+
+export const usePagination = ({ initPage, minPage, maxPage, visiblePageCount }: UsePaginationOptions) => {
   const [currentPage, setCurrentPage] = useState(initPage);
   const onPageChange = (page: number) => {
     if (isAvailablePage(page)) {
