@@ -1,11 +1,11 @@
 export interface PaginationDto<T> {
   results: T[];
   count: number;
-  next?: string;
-  previous?: string;
+  next?: number;
+  previous?: number;
 }
 
 export interface PaginationQueryDto {
-  page?: string;
-  limit?: string;
+  page?: number;
+  limit?: number;
 }
