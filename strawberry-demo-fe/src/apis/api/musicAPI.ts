@@ -1,4 +1,4 @@
-import { PaginationDto, PaginationQueryDto } from "./../dtos/paginationDto";
+import { PaginationQueryDto } from "./../dtos/paginationDto";
 import { API_URLS } from "@/constants/urls";
 import {
   MusicListRequestDTO,
